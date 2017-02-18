@@ -1,0 +1,37 @@
+#carouselcontainer {
+  width: 500px;
+  display: table;
+  margin: 0 auto;
+  border: 1px solid purple;
+}
+
+.person {
+  width: 500px;
+  border: 1px solid black;
+  margin: 0 auto;
+  height: 100px;
+  /*vertical-align: middle;*/
+  display: table;
+}
+
+img {
+  width: 100px;
+  display: table-cell;
+  padding-right: 10px;
+}
+
+#buttons {
+  width: 500px;
+  display: table;
+  margin: 0 auto;
+  border: 1px solid green;
+}
+
+#prevButton {
+  float: left;
+}
+
+#nextButton {
+  float: right;
+  text-align: right;
+}
