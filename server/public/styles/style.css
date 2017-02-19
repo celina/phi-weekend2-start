@@ -25,6 +25,7 @@ img {
   display: table;
   margin: 0 auto;
   border: 1px solid green;
+  text-align: center;
 }
 
 #prevButton {
@@ -34,4 +35,24 @@ img {
 #nextButton {
   float: right;
   text-align: right;
+}
+
+ul {
+  border: 1px solid yellow;
+  margin: 0 auto;
+  padding: 0;
+}
+
+li {
+  background-color: purple;
+  display: inline-block;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.currentdot {
+  background-color: orange;
 }
