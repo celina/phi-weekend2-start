@@ -8,7 +8,6 @@ $(document).ready(function(){
   $('#buttons').on('click', '#nextButton', nextButtonFunc);
   $('#buttons').on('click', '#prevButton', prevButtonFunc);
 
-
   // console.log('jQuery is running!'); // verify jQuery
 
     // make ajax request
@@ -23,6 +22,7 @@ $(document).ready(function(){
           addNavDots();
           moveNavDot();
           timeCountdown();
+          // fadeIn();
         } // end success
       }); // end ajax
 
@@ -52,7 +52,6 @@ $(document).ready(function(){
     function addPersonToDom() {
       $('#carouselcontainer').empty();
       var currentPerson = people[personIndex];
-      // console.log('appending person ', currentPerson);
       $('#carouselcontainer').append('<div class="person"></div>');
       var $el = $('#carouselcontainer').children().last();
       $el.append('<img src="' + currentPerson.image + '" />');
@@ -61,8 +60,9 @@ $(document).ready(function(){
       if (currentPerson.shoutout == "") {
           // if this person has no shoutout, don't create the shoutout container
         } else {
-          $el.append('<b>Shoutout!</b> "' + currentPerson.shoutout + '"<br>')
+          $el.append('<b>Shoutout!</b> "' + currentPerson.shoutout + '"')
         }; // end if person.shoutout else
+      // moveProgressBar();
     }; // end addPersonToDom
 
     function addNavDots(person, i) { // add navdots to the page
@@ -75,6 +75,7 @@ $(document).ready(function(){
         personIndex = $(this).attr('id');
         addPersonToDom();
         moveNavDot();
+        timeReset();
       });
     }; // end addNavDots
 
@@ -90,11 +91,48 @@ $(document).ready(function(){
 
   function timeCountdown() {
     timer = setInterval(nextButtonFunc, 10000);
+    moveProgressBar();
+    fadeIn();
   };
 
   function timeReset() {
     clearInterval(timer);
     timeCountdown();
+    resetProgressBar();
+    moveProgressBar();
   }
+
+  function fadeIn() {
+    $('#carouselcontainer').css({opacity: '0'}).css({background : "white"}).animate({opacity: '1'}, 900);
+  }
+
+  // Progress bar
+  // Resources:
+  //    http://api.jquery.com/animate/
+  //    https://codepen.io/thathurtabit/pen/ymECf
+
+  function moveProgressBar() {
+      var getPercent = ($('.progress-wrap').data('progress-percent') / 100);
+      var getProgressWrapWidth = $('.progress-wrap').width();
+      var progressTotal = getPercent * getProgressWrapWidth;
+      var animationLength = 10000;
+      // on page load, animate percentage bar to data percentage length
+      // .stop() used to prevent animation queueing
+      $('.progress-bar').stop().animate({
+          left: progressTotal
+      }, animationLength);
+    }
+
+    function resetProgressBar() {
+        var getPercent = 0;
+        var getProgressWrapWidth = $('.progress-wrap').width();
+        var progressTotal = getPercent * getProgressWrapWidth;
+        var animationLength = 0;
+        // on page load, animate percentage bar to data percentage length
+        // .stop() used to prevent animation queueing
+        $('.progress-bar').stop().animate({
+            left: progressTotal
+        }, animationLength);
+      }
 
 }); // end document.ready
