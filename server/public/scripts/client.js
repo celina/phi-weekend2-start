@@ -1,10 +1,14 @@
-/// removed data button, all student data shows
-
 // global person array
 var people;
 var personIndex = 0;
+var timer;
 
 $(document).ready(function(){
+
+  $('#buttons').on('click', '#nextButton', nextButtonFunc);
+  $('#buttons').on('click', '#prevButton', prevButtonFunc);
+
+
   // console.log('jQuery is running!'); // verify jQuery
 
     // make ajax request
@@ -18,28 +22,31 @@ $(document).ready(function(){
           addPersonToDom();
           addNavDots();
           moveNavDot();
+          timeCountdown();
         } // end success
       }); // end ajax
 
       // next button
-      $('#nextButton').on('click', function functionName() {
+      function nextButtonFunc() {
         personIndex++;
         if (personIndex >= people.length) { // log when you reach the end of the person array
           personIndex = 0; // start back at the beginning of the person array list
         }
         addPersonToDom();
         moveNavDot();
-      });
+        timeReset();
+      }
 
       // prev button
-      $('#prevButton').on('click', function() {
+      function prevButtonFunc() {
         personIndex--;
         if (personIndex < 0) { // log when you reach the front of the person array
           personIndex = people.length - 1; // start back at the end of the person array list
         }
         addPersonToDom();
         moveNavDot();
-      });
+        timeReset();
+      }
 
     // function to add a single person
     function addPersonToDom() {
@@ -80,5 +87,14 @@ $(document).ready(function(){
         } // end else
     }); // end function
   } // end moveNavDot
+
+  function timeCountdown() {
+    timer = setInterval(nextButtonFunc, 10000);
+  };
+
+  function timeReset() {
+    clearInterval(timer);
+    timeCountdown();
+  }
 
 }); // end document.ready
