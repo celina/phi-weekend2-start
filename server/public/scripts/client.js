@@ -23,6 +23,10 @@ $(document).ready(function(){
       $('#nextButton').on('click', function functionName() {
         console.log('Next button was clicked!');
         personIndex++;
+        if (personIndex >= people.length) { // log when you reach the end of the person array
+          console.log('You\'ve reached the end!');
+          personIndex = 0; // start back at the beginning of the person array list
+        }
         addPersonToDom();
       });
 
@@ -30,6 +34,10 @@ $(document).ready(function(){
       $('#prevButton').on('click', function functionName() {
         console.log('Prev button was clicked!');
         personIndex--;
+        if (personIndex < 0) { // log when you reach the front of the person array
+          console.log('You\'ve reached the end!');
+          personIndex = people.length - 1; // start back at the end of the person array list
+        }
         addPersonToDom();
       });
 
