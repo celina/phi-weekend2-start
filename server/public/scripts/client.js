@@ -103,7 +103,10 @@ $(document).ready(function(){
   }
 
   function fadeIn() {
-    $('#carouselcontainer').css({opacity: '0'}).css({background : "white"}).animate({opacity: '1'}, 900);
+    // $('#carouselcontainer').css({opacity: '0'}).css({background : "white"}).animate({opacity: '1'}, 900);
+    $('#carouselcontainer').hide().fadeIn(1000) // omg it finally works!
+    // resource: http://stackoverflow.com/questions/14814239/jquery-fadein-doesnt-work
+
   }
 
   // Progress bar
